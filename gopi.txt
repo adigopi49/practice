@@ -1,1 +1,25 @@
-hi
+#!/bin/bash
+
+URL="https://github.com"
+LOG_DIR="$HOME/website_health_logs"
+
+# Create log directory if it doesn't exist
+mkdir -p "$LOG_DIR"
+
+# Get today's date for the log filename
+TODAY=$(date +"%Y-%m-%d")
+LOG_FILE="$LOG_DIR/health_log_$TODAY.log"
+
+# Get HTTP status code and response time using curl
+response=$(curl -o /dev/null -s -A "Mozilla/5.0" -w "%{http_code} %{time_total}" "$URL")
+
+# Parse the response
+status_code=$(echo "$response" | awk '{print $1}')
+response_time=$(echo "$response" | awk '{print $2}')
+
+# Get current timestamp
+timestamp=$(date +"%Y-%m-%d %H:%M:%S")
+
+# Write to log file
+echo "$timestamp | Status: $status_code | Response Time: ${response_time}s" >> "$LOG_FILE"
+
