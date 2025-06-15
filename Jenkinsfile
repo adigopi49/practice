@@ -1,18 +1,21 @@
 pipeline {
-  agent {label "w1"}
+  agent { label 'w1' }
+
   tools {
-    jdk "java17"
-    maven "maven3"
+    jdk 'java17'
+    maven 'maven3'
   }
+
   stages {
-    stage("git_checkout"){
+    stage('Git Checkout') {
       steps {
         git branch: 'main', url: 'https://github.com/adigopi49/practice.git'
       }
     }
-    stage("compile"){
-      steps{
-        sh "mvn compile"
+
+    stage('Compile') {
+      steps {
+        sh 'mvn compile'
       }
     }
   }
