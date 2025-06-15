@@ -6,7 +6,9 @@ pipeline {
   }
   stages {
     stage("git_checkout"){
-      sh ""
+      steps {
+        git 'https://github.com/adigopi49/practice.git'
+      }
     }
   }
 }
