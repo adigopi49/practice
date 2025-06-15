@@ -10,5 +10,10 @@ pipeline {
         git branch: 'main', url: 'https://github.com/adigopi49/practice.git'
       }
     }
+    stage("compile"){
+      steps{
+        sh "mvn compile"
+      }
+    }
   }
 }
